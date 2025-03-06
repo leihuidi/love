@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你的答案</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #e74c3c;
+            font-size: 2em;
+        }
+        input {
+            padding: 10px;
+            font-size: 1.2em;
+            margin-top: 20px;
+            border: 2px solid #e74c3c;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        .error {
+            color: red;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .modal-content h2 {
+            color: #e74c3c;
+            font-size: 2em;
+        }
+        .modal-content button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .modal-content button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>请输入“我也喜欢你”💖</h1>
+    <input type="text" id="userInput" placeholder="在这里输入你的答案">
+    <button onclick="validateInput()">提交</button>
+    <p id="errorMessage" class="error"></p>
+
+    <!-- 模态框 -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h2>太好了！我们在一起吧！💖</h2>
+            <button onclick="closeModal()">好的</button>
+        </div>
+    </div>
+
+    <script>
+        function validateInput() {
+            const userInput = document.getElementById("userInput").value;
+            const correctAnswer = "我也喜欢你";
+            const rejectAnswers = ["我讨厌你", "我不喜欢你"];
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (userInput === correctAnswer) {
+                // 显示模态框
+                const modal = document.getElementById("successModal");
+                modal.style.display = "flex";
+                errorMessage.textContent = ""; // 清空错误信息
+            } else if (rejectAnswers.includes(userInput)) {
+                // 跳转到遗憾页面
+                window.location.href = "sad.html";
+            } else {
+                errorMessage.textContent = "输入错误，请重新输入！";
+            }
+        }
+
+        function closeModal() {
+            // 关闭模态框并跳转到庆祝页面
+            window.location.href = "together.html";
+        }
+    </script>
+</body>
+</html>
